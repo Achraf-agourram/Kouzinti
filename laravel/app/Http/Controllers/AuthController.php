@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -12,11 +13,17 @@ class AuthController extends Controller
         return view('auth');
     }
 
-    public function login ()
+    public function login (Request $request)
     {
-        echo "<script>console.log('logged')</script>";
+        if (Auth::attempt($request->only(['email', 'password']))) {
+            $request->session()->regenerate();
 
-        return redirect('/login');
+            echo "<script>console.log('good')</script>";
+            return view('home');
+        }
+
+        echo "<script>console.log('wrong')</script>";
+        return view('auth');
     }
 
     public function register (Request $request)

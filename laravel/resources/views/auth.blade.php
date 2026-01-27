@@ -61,20 +61,19 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="ph ph-envelope text-gray-400"></i>
                                 </div>
-                                <input type="email" name="emailToLogin" id="email" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="chef@exemple.com">
+                                <input type="email" name="email" id="email" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="chef@exemple.com">
                             </div>
                         </div>
 
                         <div>
                             <div class="flex justify-between">
                                 <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
-                                <a href="#" class="text-sm font-medium text-chef-600 hover:text-chef-500">Oublié ?</a>
                             </div>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="ph ph-lock-key text-gray-400"></i>
                                 </div>
-                                <input type="password" name="passwordToLogin" id="password" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="••••••••">
+                                <input type="password" name="password" id="password" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="••••••••">
                             </div>
                         </div>
                     </div>
