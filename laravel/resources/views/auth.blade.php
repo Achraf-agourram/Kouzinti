@@ -52,14 +52,16 @@
                     <p class="mt-2 text-sm text-gray-600">Entrez vos identifiants pour accéder à vos recettes.</p>
                 </div>
 
-                <form class="mt-8 space-y-6" action="index.html"> <div class="space-y-4">
+                <form class="mt-8 space-y-6" method="post" action="/login">
+                    @csrf
+                    <div class="space-y-4">
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">Adresse Email</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="ph ph-envelope text-gray-400"></i>
                                 </div>
-                                <input type="email" id="email" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="chef@exemple.com">
+                                <input type="email" name="emailToLogin" id="email" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="chef@exemple.com">
                             </div>
                         </div>
 
@@ -72,7 +74,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="ph ph-lock-key text-gray-400"></i>
                                 </div>
-                                <input type="password" id="password" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="••••••••">
+                                <input type="password" name="passwordToLogin" id="password" required class="pl-10 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none sm:text-sm" placeholder="••••••••">
                             </div>
                         </div>
                     </div>
@@ -96,20 +98,21 @@
                     <p class="mt-2 text-sm text-gray-600">Commencez votre voyage culinaire dès aujourd'hui.</p>
                 </div>
 
-                <form class="mt-8 space-y-4" action="index.html">
+                <form class="mt-8 space-y-4" method="post" action="/register">
+                    @csrf
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Nom complet</label>
-                        <input type="text" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="Paul Bocuse">
+                        <input type="text" name="fullName" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="Paul Bocuse">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Adresse Email</label>
-                        <input type="email" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="chef@exemple.com">
+                        <input type="email" name="email" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="chef@exemple.com">
                     </div>
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
-                        <input type="password" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="••••••••">
+                        <input type="password" name="password" required class="mt-1 block w-full border-gray-300 border rounded-lg p-3 focus:ring-chef-500 focus:border-chef-500 outline-none" placeholder="••••••••">
                         <p class="text-xs text-gray-500 mt-1">Au moins 8 caractères</p>
                     </div>
 
