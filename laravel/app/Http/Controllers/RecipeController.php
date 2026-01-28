@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
-    public function recipesPage ()
+    public function home ()
     {
-        return view('recipes');
+        $recipes = Recipe::with(['category', 'user'])->limit(3)->get();
+
+        return view('home', compact('recipes'));
     }
 }
