@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Ingredient;
 use App\Models\Recipe;
+use App\Models\Step;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecipeController extends Controller
 {
@@ -22,6 +24,34 @@ class RecipeController extends Controller
     
     public function addRecipe (Request $request)
     {
-        return print_r([$request->ingredients, $request->steps]);
+        $recipe = Recipe::create([
+            'recipeTitle' => $request->title,
+            'recipeDescription' => $request->description,
+            'image' => $request->image,
+            'user_id' => Auth::id(),
+            'category_id' => $request->category
+        ]);
+
+        foreach ($request->ingredients as $name) {
+            $ingredient = Ingredient::where('ingredientTitle', $name)->first();
+
+            if ($ingredient) {
+                $recipe->ingredients()->attach($ingredient->id);
+            }
+        }
+
+        $order = 1;
+        foreach ($request->steps as $step) {
+            if (!empty($step)) {
+                Step::create([
+                    'stepDescription' => $step,
+                    'stepOrder' => $order++,
+                    'recipe_id' => $recipe->id
+                ]);
+            }
+        }
+
+        return redirect('/recipes');
+
     }
 }
