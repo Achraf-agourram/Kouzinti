@@ -19,4 +19,9 @@ class RecipeController extends Controller
 
         return view('home', compact('recipes', 'categories', 'recipesTotal', 'chefsTotal', 'ingredients'));
     }
+    
+    public function addRecipe (Request $request)
+    {
+        return print_r([$request->ingredients, $request->steps]);
+    }
 }

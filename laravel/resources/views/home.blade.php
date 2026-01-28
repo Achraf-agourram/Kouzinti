@@ -143,11 +143,11 @@
                 </button>
             </div>
             
-            <form action="/addReceipt" method="post" class="space-y-5" onsubmit="event.preventDefault(); alert('Recette prête à être envoyée !');">
+            <form action="/addRecipe" method="post" class="space-y-5">
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Titre de la recette</label>
-                    <input type="text" name="title" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois">
+                    <input type="text" name="title" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois" required>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
@@ -245,7 +245,7 @@
                 const tag = document.createElement('div');
                 tag.className = 'flex items-center gap-2 bg-chef-100 text-chef-900 px-3 py-1 rounded-full text-sm font-medium animate-fade-in';
                 tag.innerHTML = `
-                    <input type="text" class="bg-chef-100" name="ingredients[]" placeholder="${ing}" disabled>
+                    <input type="text" class="bg-chef-100 outline-none" name="ingredients[]" value="${ing}" readonly>
                     <button type="button" onclick="removeIngredient(${index})" class="text-chef-500 hover:text-red-600">
                         <i class="ph-bold ph-x"></i>
                     </button>
@@ -286,7 +286,7 @@
                 li.innerHTML = `
                     <div class="flex gap-3">
                         <span class="bg-gray-900 text-white h-6 w-6 flex items-center justify-center rounded-full text-xs flex-shrink-0 mt-0.5">${index + 1}</span>
-                        <input class="text-gray-700 bg-white text-sm" name="steps[]" placeholder="${step}" disabled>
+                        <input class="text-gray-700 bg-white text-sm outline-none" name="steps[]" value="${step}" readonly>
                     </div>
                     <button type="button" onclick="removeStep(${index})" class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition">
                         <i class="ph-bold ph-trash"></i>
