@@ -11,10 +11,10 @@ class RecipeController extends Controller
 {
     public function home ()
     {
-        $recipes = Recipe::with(['category', 'user'])->limit(3)->get();
+        $recipes = Recipe::with(['category', 'user'])->withCount('comments')->limit(3)->get();
         $recipesTotal = Recipe::count();
         $categories = Category::all();
-        $chefsTotal = Recipe::distinct('user_id')->count('user_id');;
+        $chefsTotal = Recipe::distinct('user_id')->count('user_id');
 
         return view('home', compact('recipes', 'categories', 'recipesTotal', 'chefsTotal'));
     }

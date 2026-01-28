@@ -35,9 +35,9 @@
                 </div>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-chef-600 font-medium">Accueil</a>
-                    <a href="#recettes" class="text-gray-500 hover:text-chef-500 transition">Explorer</a>
-                    <a href="#" class="text-gray-500 hover:text-chef-500 transition">Mes Recettes</a>
+                    <a href="home" class="text-chef-600 font-medium">Accueil</a>
+                    <a href="recipes" class="text-gray-500 hover:text-chef-500 transition">Explorer</a>
+                    <a href="myrecipes" class="text-gray-500 hover:text-chef-500 transition">Mes Recettes</a>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -108,7 +108,7 @@
                                 <span class="text-xs font-medium text-gray-600">{{ $recipe->user->fullName }}</span>
                             </div>
                             <div class="flex items-center gap-3 text-gray-400 text-sm">
-                                <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i>0</span>
+                                <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i>{{ $recipe->comments_count }}</span>
                             </div>
                         </div>
                     </div>
@@ -118,9 +118,9 @@
         </div>
 
         <div class="text-center mt-12">
-            <button class="text-chef-600 font-medium hover:underline flex items-center justify-center mx-auto gap-2">
+            <a href="recipes" class="text-chef-600 font-medium hover:underline flex items-center justify-center mx-auto gap-2">
                 Charger plus de recettes <i class="ph ph-arrow-down"></i>
-            </button>
+            </a>
         </div>
     </main>
 
