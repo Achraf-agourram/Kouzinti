@@ -52,7 +52,7 @@
         </div>
     </nav>
 
-    <header class="relative bg-chef-50 pt-16 pb-24 overflow-hidden">
+    <header class="relative bg-chef-50 pt-16 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight mb-6">
                 Révélez le <span class="text-transparent bg-clip-text bg-gradient-to-r from-chef-500 to-yellow-500">Chef</span> qui est en vous.
@@ -61,13 +61,13 @@
                 Rejoignez notre communauté de passionnés. Partagez vos créations, découvrez des saveurs inédites et échangez vos meilleures astuces.
             </p>
 
-            <div class="max-w-2xl mx-auto bg-white p-2 rounded-full shadow-xl flex items-center border border-gray-100">
+            <!--div class="max-w-2xl mx-auto bg-white p-2 rounded-full shadow-xl flex items-center border border-gray-100">
                 <i class="ph ph-magnifying-glass text-xl text-gray-400 ml-4"></i>
                 <input type="text" placeholder="Rechercher une recette (ex: Lasagnes, Tiramisu...)" class="flex-1 p-3 outline-none text-gray-700 placeholder-gray-400 rounded-full">
                 <button class="bg-gray-900 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">Chercher</button>
-            </div>
+            </div-->
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-12">
+            <div class="grid grid-cols-2 gap-4 pb-4 max-w-4xl mx-auto mt-12">
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
                     <div class="text-2xl font-bold text-chef-600">1,240</div>
                     <div class="text-sm text-gray-500">Recettes publiées</div>
@@ -91,92 +91,37 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach ($recipes as $recipe)
+                <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="{{ $recipe->image }}" alt="{{ $recipe->recipeTitle }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">{{ $recipe->category->categoryTitle }}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $recipe->recipeTitle }}</h3>
+                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ $recipe->recipeDescription }}</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="text-xs text-center pt-1 w-6 h-6 rounded-full bg-yellow-200" title="{{ $recipe->user->fullName }}">{{ strtoupper(substr($recipe->user->fullName, 0, 2)) }}</div>
+                                <span class="text-xs font-medium text-gray-600">{{ $recipe->user->fullName }}</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-400 text-sm">
+                                <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i>0</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
             
-            <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80" alt="Salade" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 right-3 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">Sain</span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">Plat Principal</span>
-                        <div class="flex items-center text-yellow-400 text-sm">
-                            <i class="ph-fill ph-star"></i>
-                            <span class="text-gray-500 ml-1 font-medium">4.8</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Buddha Bowl Avocat</h3>
-                    <p class="text-gray-500 text-sm mb-4 line-clamp-2">Une explosion de saveurs saines avec du quinoa, de l'avocat frais et une vinaigrette au citron vert.</p>
-                    
-                    <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <img src="https://ui-avatars.com/api/?name=Alice&background=random" class="w-6 h-6 rounded-full">
-                            <span class="text-xs font-medium text-gray-600">Par Alice</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-gray-400 text-sm">
-                            <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i> 12</span>
-                            <span class="flex items-center gap-1 hover:text-red-500 cursor-pointer"><i class="ph ph-heart"></i> 45</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        </div>
 
-            <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80" alt="Gâteau" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 right-3 bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">Populaire</span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">Dessert</span>
-                        <div class="flex items-center text-yellow-400 text-sm">
-                            <i class="ph-fill ph-star"></i>
-                            <span class="text-gray-500 ml-1 font-medium">4.9</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Cheesecake aux Fraises</h3>
-                    <p class="text-gray-500 text-sm mb-4 line-clamp-2">Le classique new-yorkais revisité avec un coulis de fraises fraîches du jardin.</p>
-                    
-                    <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <img src="https://ui-avatars.com/api/?name=Marc&background=random" class="w-6 h-6 rounded-full">
-                            <span class="text-xs font-medium text-gray-600">Par Marc</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-gray-400 text-sm">
-                            <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i> 34</span>
-                            <span class="flex items-center gap-1 hover:text-red-500 cursor-pointer"><i class="ph ph-heart"></i> 120</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-             <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">Plat</span>
-                        <div class="flex items-center text-yellow-400 text-sm">
-                            <i class="ph-fill ph-star"></i>
-                            <span class="text-gray-500 ml-1 font-medium">4.5</span>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pizza Napolitaine</h3>
-                    <p class="text-gray-500 text-sm mb-4 line-clamp-2">Pâte fine fermentée 24h, tomates San Marzano et mozzarella di bufala.</p>
-                    
-                    <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <img src="https://ui-avatars.com/api/?name=Luigi&background=random" class="w-6 h-6 rounded-full">
-                            <span class="text-xs font-medium text-gray-600">Par Luigi</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-gray-400 text-sm">
-                            <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i> 8</span>
-                            <span class="flex items-center gap-1 hover:text-red-500 cursor-pointer"><i class="ph ph-heart"></i> 60</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        <div class="text-center mt-12">
+            <button class="text-chef-600 font-medium hover:underline flex items-center justify-center mx-auto gap-2">
+                Charger plus de recettes <i class="ph ph-arrow-down"></i>
+            </button>
         </div>
     </main>
 
@@ -187,7 +132,6 @@
                 <span class="font-bold text-xl">Cui<span class="text-chef-500">Zone</span></span>
             </div>
             <p class="text-gray-400 text-sm mb-6">Partagez l'amour de la cuisine, un plat à la fois.</p>
-            <div class="text-gray-600 text-xs">
         </div>
     </footer>
 
