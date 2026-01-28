@@ -12,7 +12,8 @@ class RecipeController extends Controller
     {
         $recipes = Recipe::with(['category', 'user'])->limit(3)->get();
         $categories = Category::all();
+        $recipesTotal = Recipe::count();
 
-        return view('home', compact('recipes', 'categories'));
+        return view('home', compact('recipes', 'categories', 'recipesTotal'));
     }
 }

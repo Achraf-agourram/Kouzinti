@@ -69,7 +69,7 @@
 
             <div class="grid grid-cols-2 gap-4 pb-4 max-w-4xl mx-auto mt-12">
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
-                    <div class="text-2xl font-bold text-chef-600">1,240</div>
+                    <div class="text-2xl font-bold text-chef-600">{{ $recipesTotal }}</div>
                     <div class="text-sm text-gray-500">Recettes publiées</div>
                 </div>
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
