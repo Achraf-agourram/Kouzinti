@@ -8,6 +8,6 @@ class RecipeController extends Controller
 {
     public function recipesPage ()
     {
-        return view('home');
+        return view('recipes');
     }
 }

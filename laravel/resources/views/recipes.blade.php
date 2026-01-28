@@ -13,7 +13,7 @@
                         chef: {
                             50: '#fff7ed',
                             100: '#ffedd5',
-                            500: '#f97316', // Orange principal
+                            500: '#f97316',
                             600: '#ea580c',
                             900: '#7c2d12',
                         }
@@ -75,14 +75,6 @@
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
                     <div class="text-2xl font-bold text-chef-600">850</div>
                     <div class="text-sm text-gray-500">Chefs actifs</div>
-                </div>
-                <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
-                    <div class="text-2xl font-bold text-chef-600">Top 3</div>
-                    <div class="text-sm text-gray-500">Desserts notés</div>
-                </div>
-                <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
-                    <div class="text-2xl font-bold text-chef-600">5k+</div>
-                    <div class="text-sm text-gray-500">Commentaires</div>
                 </div>
             </div>
         </div>
@@ -186,12 +178,6 @@
                 </div>
             </article>
         </div>
-
-        <div class="text-center mt-12">
-            <button class="text-chef-600 font-medium hover:underline flex items-center justify-center mx-auto gap-2">
-                Charger plus de recettes <i class="ph ph-arrow-down"></i>
-            </button>
-        </div>
     </main>
 
     <footer class="bg-gray-900 text-white py-12">
@@ -202,8 +188,6 @@
             </div>
             <p class="text-gray-400 text-sm mb-6">Partagez l'amour de la cuisine, un plat à la fois.</p>
             <div class="text-gray-600 text-xs">
-                &copy; 2023 CuiZone Project. Tous droits réservés.
-            </div>
         </div>
     </footer>
 
