@@ -18,12 +18,10 @@ class AuthController extends Controller
         if (Auth::attempt($request->only(['email', 'password']))) {
             $request->session()->regenerate();
 
-            echo "<script>console.log('good')</script>";
-            return view('home');
+            redirect('/home');
         }
 
-        echo "<script>console.log('wrong')</script>";
-        return view('auth');
+        return redirect('/login')->with('failed', 'Invalid credentials');
     }
 
     public function register (Request $request)
