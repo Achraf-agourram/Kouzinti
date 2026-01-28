@@ -150,12 +150,17 @@
                     <input type="text" name="title" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois" required>
                 </div>
 
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Description de la recette</label>
+                    <input type="text" name="description" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Une petite description" required>
+                </div>
+
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
                         <select name="category" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none bg-white">
                             @foreach ($categories as $category)
-                                <option>{{ $category->categoryTitle }}</option>
+                                <option value="{{ $category->id }}">{{ $category->categoryTitle }}</option>
                             @endforeach
                         </select>
                     </div>

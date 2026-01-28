@@ -11,6 +11,6 @@ Route::get('/register', [AuthController::class, 'authPage'])->middleware('guest'
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest')->name('login');
 
 Route::get('/home', [RecipeController::class, 'home'])->middleware('auth');
-Route::get('/recipes', [RecipeController::class, 'recipesPage'])->middleware('auth');
+Route::get('/recipes', [RecipeController::class, 'home'])->middleware('auth');
 
 Route::post('/addRecipe', [RecipeController::class, 'addRecipe'])->middleware('auth');
