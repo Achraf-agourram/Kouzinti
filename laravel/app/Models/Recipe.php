@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
-    protected $fillable = ['recipeTitle', 'recipeDescription', 'image'];
+    protected $fillable = ['recipeTitle', 'recipeDescription', 'image', 'user_id', 'category_id'];
 
     public function user()
     {
