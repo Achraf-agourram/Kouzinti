@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuiZone - Partagez vos saveurs</title>
+    <title>Kouzinti - Partagez vos saveurs</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -143,33 +143,32 @@
                 </button>
             </div>
             
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('Recette prête à être envoyée !');">
-                
+            <form action="/addReceipt" method="post" class="space-y-5" onsubmit="event.preventDefault(); alert('Recette prête à être envoyée !');">
+                @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Titre de la recette</label>
-                    <input type="text" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois">
+                    <input type="text" name="title" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois">
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Catégorie</label>
-                        <select class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none bg-white">
-                            <option>Entrée</option>
-                            <option>Plat Principal</option>
-                            <option>Dessert</option>
-                            <option>Boisson</option>
+                        <select name="category" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none bg-white">
+                            @foreach ($categories as $category)
+                                <option>{{ $category->categoryTitle }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Image (URL)</label>
-                        <input type="url" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none" placeholder="https://...">
+                        <input name="image" type="url" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none" placeholder="https://...">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Ingrédients</label>
                     <div class="flex gap-2 mb-2">
-                        <input list="ingredients-suggestions" id="ingredientInput" type="text" 
+                        <input list="ingredients-suggestions" id="ingredientInput" type="text" name="ingredients[]"
                             class="flex-1 border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none" 
                             placeholder="Ex: Tomates, Farine..." onkeypress="handleEnter(event, addIngredient)">
                         
@@ -179,14 +178,9 @@
                     </div>
 
                     <datalist id="ingredients-suggestions">
-                        <option value="Farine">
-                        <option value="Sucre">
-                        <option value="Oeufs">
-                        <option value="Lait">
-                        <option value="Beurre">
-                        <option value="Tomates">
-                        <option value="Poulet">
-                        <option value="Chocolat">
+                        @foreach ($ingredients as $ingredient)
+                            <option value="{{ $ingredient->ingredientTitle }}">
+                        @endforeach
                     </datalist>
 
                     <div id="ingredientsList" class="flex flex-wrap gap-2 min-h-[40px] p-2 bg-gray-50 rounded-lg border border-dashed border-gray-300">
@@ -197,7 +191,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Étapes de préparation</label>
                     <div class="flex gap-2 mb-2">
-                        <input id="stepInput" type="text" 
+                        <input id="stepInput" type="text" name="steps[]"
                             class="flex-1 border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none" 
                             placeholder="Décrivez l'étape ici..." onkeypress="handleEnter(event, addStep)">
                         
@@ -251,7 +245,7 @@
                 const tag = document.createElement('div');
                 tag.className = 'flex items-center gap-2 bg-chef-100 text-chef-900 px-3 py-1 rounded-full text-sm font-medium animate-fade-in';
                 tag.innerHTML = `
-                    <span>${ing}</span>
+                    <input type="text" class="bg-chef-100" name="ingredients[]" placeholder="${ing}" disabled>
                     <button type="button" onclick="removeIngredient(${index})" class="text-chef-500 hover:text-red-600">
                         <i class="ph-bold ph-x"></i>
                     </button>
@@ -292,7 +286,7 @@
                 li.innerHTML = `
                     <div class="flex gap-3">
                         <span class="bg-gray-900 text-white h-6 w-6 flex items-center justify-center rounded-full text-xs flex-shrink-0 mt-0.5">${index + 1}</span>
-                        <span class="text-gray-700 text-sm">${step}</span>
+                        <input class="text-gray-700 bg-white text-sm" name="steps[]" placeholder="${step}" disabled>
                     </div>
                     <button type="button" onclick="removeStep(${index})" class="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition">
                         <i class="ph-bold ph-trash"></i>
