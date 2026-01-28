@@ -44,8 +44,8 @@
                     <button onclick="document.getElementById('addRecipeModal').showModal()" class="hidden md:flex items-center gap-2 bg-chef-500 text-white px-4 py-2 rounded-full hover:bg-chef-600 transition shadow-lg shadow-chef-500/30">
                         <i class="ph ph-plus-bold"></i> Créer une recette
                     </button>
-                    <div class="h-10 w-10 rounded-full bg-gray-200 border-2 border-white shadow overflow-hidden cursor-pointer">
-                        <img src="https://ui-avatars.com/api/?name=Chef+User&background=random" alt="Profil">
+                    <div class="h-10 w-10 text-center pt-1 rounded-full bg-green-200 border-2 border-white shadow overflow-hidden cursor-pointer">
+                        {{ strtoupper(substr(auth()->user()->fullName, 0, 2)) }}
                     </div>
                 </div>
             </div>
