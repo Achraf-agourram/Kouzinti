@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -11,9 +12,10 @@ class RecipeController extends Controller
     public function home ()
     {
         $recipes = Recipe::with(['category', 'user'])->limit(3)->get();
-        $categories = Category::all();
         $recipesTotal = Recipe::count();
+        $categories = Category::all();
+        $chefsTotal = Recipe::distinct('user_id')->count('user_id');;
 
-        return view('home', compact('recipes', 'categories', 'recipesTotal'));
+        return view('home', compact('recipes', 'categories', 'recipesTotal', 'chefsTotal'));
     }
 }

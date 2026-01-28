@@ -73,7 +73,7 @@
                     <div class="text-sm text-gray-500">Recettes publiées</div>
                 </div>
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
-                    <div class="text-2xl font-bold text-chef-600">850</div>
+                    <div class="text-2xl font-bold text-chef-600">{{ $chefsTotal }}</div>
                     <div class="text-sm text-gray-500">Chefs actifs</div>
                 </div>
             </div>
