@@ -15,3 +15,4 @@ Route::get('/recipes', [RecipeController::class, 'recipes'])->middleware('auth')
 
 Route::post('/addRecipe', [RecipeController::class, 'addRecipe'])->middleware('auth');
 Route::get('/editRecipe/{id}', [RecipeController::class, 'editRecipeForm'])->middleware('auth');
+Route::post('/editRecipe', [RecipeController::class, 'editRecipe'])->middleware('auth');

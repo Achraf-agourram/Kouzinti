@@ -84,6 +84,7 @@
             
             <form action="/editRecipe" method="post" class="space-y-5">
                 @csrf
+                <input type="hidden" name="recipeId" value="{{ $recipeToEdit->id }}">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Titre de la recette</label>
                     <input type="text" name="title" class="w-full border-gray-300 border rounded-lg p-3 focus:ring-2 focus:ring-chef-500 outline-none transition" placeholder="Ex: Gratin Dauphinois" value="{{ $recipeToEdit->recipeTitle }}" required>
