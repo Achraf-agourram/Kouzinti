@@ -67,10 +67,11 @@ class RecipeController extends Controller
 
     public function editRecipeForm ($id)
     {
+        $recipeToEdit = Recipe::with(['ingredients', 'steps', 'category'])->find($id);
+        if (Auth::id() !== $recipeToEdit->user_id) return redirect('/recipes');
+
         $categories = Category::all();
         $ingredients = Ingredient::all();
-
-        $recipeToEdit = Recipe::with(['ingredients', 'steps', 'category'])->find($id);
 
         return view('editRecipe', compact('categories', 'ingredients', 'recipeToEdit'));
     }
@@ -118,6 +119,7 @@ class RecipeController extends Controller
 
         if (Auth::id() !== $recipe->user_id) return redirect('/recipes');
         
+        $recipe->delete();
         return redirect('/recipes');
     }
 }
