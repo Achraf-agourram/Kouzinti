@@ -26,6 +26,53 @@
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
 
+    <script>
+        var ingredients = [];
+
+        function addIngredient() {
+            const value = ingredientInput.value.trim();
+            if (value) {
+                ingredients.push(value);
+                ingredientInput.value = '';
+                renderIngredients();
+                ingredientInput.focus();
+            }
+        }
+
+        function removeIngredient(index) {
+            ingredients.splice(index, 1);
+            renderIngredients();
+        }
+
+        function renderIngredients() {
+            ingredientsListContainer.innerHTML = '';
+            if (ingredients.length === 0) {
+                ingredientsListContainer.innerHTML = '<span class="text-gray-400 text-sm italic self-center px-2">Aucun ingrédient ajouté</span>';
+                return;
+            }
+
+            ingredients.forEach((ing, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'flex items-center gap-2 bg-chef-100 text-chef-900 px-3 py-1 rounded-full text-sm font-medium animate-fade-in';
+                tag.innerHTML = `
+                    <input type="text" class="bg-chef-100 outline-none" name="ingredients[]" value="${ing}" readonly>
+                    <button type="button" onclick="removeIngredient(${index})" class="text-chef-500 hover:text-red-600">
+                        <i class="ph-bold ph-x"></i>
+                    </button>
+                `;
+                ingredientsListContainer.appendChild(tag);
+            });
+        }
+
+        function handleEnter(event, callback) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                callback();
+            }
+        }
+    </script>
+
+
     <div class="p-0 rounded-2xl shadow-2xl backdrop:bg-gray-900/50 w-full max-w-lg open:animate-fade-in scroll-smooth">
         <div class="bg-white p-6 md:p-8 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
