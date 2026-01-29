@@ -154,7 +154,7 @@
                             <li class="flex justify-between items-start gap-3 p-2 bg-white rounded shadow-sm border border-gray-100 animate-fade-in group">
                                 <div class="flex gap-3">
                                     <span class="bg-gray-900 text-white h-6 w-6 flex items-center justify-center rounded-full text-xs flex-shrink-0 mt-0.5">{{ $step->stepOrder }}</span>
-                                    <input class="text-gray-700 bg-white text-sm outline-none" name="steps[]" value="{{ $step->stepDescription }}">
+                                    <input class="text-gray-700 bg-white text-sm outline-none" name="steps[{{ $step->id }}]" value="{{ $step->stepDescription }}">
                                 </div>
                             </li>
                         @endforeach
