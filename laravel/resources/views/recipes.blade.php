@@ -112,8 +112,7 @@
 
                                 <form action="/deleteRecipe" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette recette ?');">
                                     @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
+                                    <button type="submit" name="recipeToDelete" value="{{ $recipe->id }}"
                                             class="p-2 bg-white/90 backdrop-blur text-red-500 rounded-full shadow-md hover:bg-red-500 hover:text-white transition-colors" 
                                             title="Supprimer la recette">
                                         <i class="ph-bold ph-trash"></i>

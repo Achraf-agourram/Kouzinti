@@ -31,51 +31,6 @@ class RecipeController extends Controller
 
         return view('recipes', compact('recipes', 'categories', 'ingredients'));
     }
-
-    public function editRecipeForm ($id)
-    {
-        $categories = Category::all();
-        $ingredients = Ingredient::all();
-
-        $recipeToEdit = Recipe::with(['ingredients', 'steps', 'category'])->find($id);
-
-        return view('editRecipe', compact('categories', 'ingredients', 'recipeToEdit'));
-    }
-
-    public function editRecipe (Request $request)
-    {
-        $recipe = Recipe::findOrFail($request->recipeId);
-
-        $recipe->update([
-            'recipeTitle' => $request->title,
-            'recipeDescription' => $request->description,
-            'image' => $request->image,
-            'category_id' => $request->category
-        ]);
-
-        $recipe->ingredients()->detach();
-
-        foreach ($request->ingredients as $name) {
-            $ingredient = Ingredient::where('ingredientTitle', $name)->first();
-
-            if ($ingredient) {
-                $recipe->ingredients()->attach($ingredient->id);
-            }
-        }
-
-        $steps = array_filter($request->steps);
-        $stepsIds = array_keys($steps);
-
-        foreach($stepsIds as $id) {
-            $stepToEdit = Step::findOrFail($id);
-
-            $stepToEdit->update([
-                'stepDescription' => $steps[$id]
-            ]);
-        }
-
-        return Redirect('/recipes');
-    }
     
     public function addRecipe (Request $request)
     {
@@ -108,5 +63,61 @@ class RecipeController extends Controller
 
         return redirect('/recipes');
 
+    }
+
+    public function editRecipeForm ($id)
+    {
+        $categories = Category::all();
+        $ingredients = Ingredient::all();
+
+        $recipeToEdit = Recipe::with(['ingredients', 'steps', 'category'])->find($id);
+
+        return view('editRecipe', compact('categories', 'ingredients', 'recipeToEdit'));
+    }
+
+    public function editRecipe (Request $request)
+    {
+        $recipe = Recipe::findOrFail($request->recipeId);
+
+        if (Auth::id() !== $recipe->user_id) return redirect('/recipes');
+
+        $recipe->update([
+            'recipeTitle' => $request->title,
+            'recipeDescription' => $request->description,
+            'image' => $request->image,
+            'category_id' => $request->category
+        ]);
+
+        $recipe->ingredients()->detach();
+
+        foreach ($request->ingredients as $name) {
+            $ingredient = Ingredient::where('ingredientTitle', $name)->first();
+
+            if ($ingredient) {
+                $recipe->ingredients()->attach($ingredient->id);
+            }
+        }
+
+        $steps = array_filter($request->steps);
+        $stepsIds = array_keys($steps);
+
+        foreach($stepsIds as $id) {
+            $stepToEdit = Step::findOrFail($id);
+
+            $stepToEdit->update([
+                'stepDescription' => $steps[$id]
+            ]);
+        }
+
+        return Redirect('/recipes');
+    }
+
+    public function deleteRecipe (Request $request)
+    {
+        $recipe = Recipe::findOrFail($request->recipeToDelete);
+
+        if (Auth::id() !== $recipe->user_id) return redirect('/recipes');
+        
+        return redirect('/recipes');
     }
 }
