@@ -8,6 +8,7 @@ use App\Models\Recipe;
 use App\Models\Step;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class RecipeController extends Controller
 {
@@ -43,7 +44,37 @@ class RecipeController extends Controller
 
     public function editRecipe (Request $request)
     {
-        return print_r($request->ingredients);
+        $recipe = Recipe::findOrFail($request->recipeId);
+
+        $recipe->update([
+            'recipeTitle' => $request->title,
+            'recipeDescription' => $request->description,
+            'image' => $request->image,
+            'category_id' => $request->category
+        ]);
+
+        $recipe->ingredients()->detach();
+
+        foreach ($request->ingredients as $name) {
+            $ingredient = Ingredient::where('ingredientTitle', $name)->first();
+
+            if ($ingredient) {
+                $recipe->ingredients()->attach($ingredient->id);
+            }
+        }
+
+        $steps = array_filter($request->steps);
+        $stepsIds = array_keys($steps);
+
+        foreach($stepsIds as $id) {
+            $stepToEdit = Step::findOrFail($id);
+
+            $stepToEdit->update([
+                'stepDescription' => $steps[$id]
+            ]);
+        }
+
+        return Redirect('/recipes');
     }
     
     public function addRecipe (Request $request)
