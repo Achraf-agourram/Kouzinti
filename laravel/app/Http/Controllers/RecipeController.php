@@ -21,6 +21,15 @@ class RecipeController extends Controller
 
         return view('home', compact('recipes', 'categories', 'recipesTotal', 'chefsTotal', 'ingredients'));
     }
+
+    public function recipes ()
+    {
+        $recipes = Recipe::with(['category', 'user'])->withCount('comments')->get();
+        $categories = Category::all();
+        $ingredients = Ingredient::all();
+
+        return view('recipes', compact('recipes', 'categories', 'ingredients'));
+    }
     
     public function addRecipe (Request $request)
     {
