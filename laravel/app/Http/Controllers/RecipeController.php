@@ -40,6 +40,11 @@ class RecipeController extends Controller
 
         return view('editRecipe', compact('categories', 'ingredients', 'recipeToEdit'));
     }
+
+    public function editRecipe (Request $request)
+    {
+        return print_r($request->ingredients);
+    }
     
     public function addRecipe (Request $request)
     {
