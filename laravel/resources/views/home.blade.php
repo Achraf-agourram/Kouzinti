@@ -61,12 +61,6 @@
                 Rejoignez notre communauté de passionnés. Partagez vos créations, découvrez des saveurs inédites et échangez vos meilleures astuces.
             </p>
 
-            <!--div class="max-w-2xl mx-auto bg-white p-2 rounded-full shadow-xl flex items-center border border-gray-100">
-                <i class="ph ph-magnifying-glass text-xl text-gray-400 ml-4"></i>
-                <input type="text" placeholder="Rechercher une recette (ex: Lasagnes, Tiramisu...)" class="flex-1 p-3 outline-none text-gray-700 placeholder-gray-400 rounded-full">
-                <button class="bg-gray-900 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition">Chercher</button>
-            </div-->
-
             <div class="grid grid-cols-2 gap-4 pb-4 max-w-4xl mx-auto mt-12">
                 <div class="bg-white/60 backdrop-blur p-4 rounded-xl border border-white shadow-sm">
                     <div class="text-2xl font-bold text-chef-600">{{ $recipesTotal }}</div>

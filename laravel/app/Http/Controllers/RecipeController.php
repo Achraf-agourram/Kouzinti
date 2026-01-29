@@ -31,9 +31,14 @@ class RecipeController extends Controller
         return view('recipes', compact('recipes', 'categories', 'ingredients'));
     }
 
-    public function editRecipeForm ()
+    public function editRecipeForm ($id)
     {
-        return view('editRecipe');
+        $categories = Category::all();
+        $ingredients = Ingredient::all();
+
+        $recipeToEdit = Recipe::with(['ingredients', 'steps', 'category'])->find($id);
+
+        return view('editRecipe', compact('categories', 'ingredients', 'recipeToEdit'));
     }
     
     public function addRecipe (Request $request)
