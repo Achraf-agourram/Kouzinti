@@ -30,6 +30,11 @@ class RecipeController extends Controller
 
         return view('recipes', compact('recipes', 'categories', 'ingredients'));
     }
+
+    public function editRecipeForm ()
+    {
+        return view('editRecipe');
+    }
     
     public function addRecipe (Request $request)
     {
