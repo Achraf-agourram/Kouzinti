@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="pt-4 flex gap-3">
-                    <button type="button" onclick="document.getElementById('addRecipeModal').close()" class="flex-1 py-3 text-gray-700 font-medium hover:bg-gray-100 rounded-lg transition">Annuler</button>
+                    <a href="/recipes" class="flex-1 py-3 text-gray-700 font-medium hover:bg-gray-100 rounded-lg transition">Annuler</a>
                     <button type="submit" class="flex-1 py-3 bg-chef-500 text-white font-bold rounded-lg hover:bg-chef-600 transition shadow-lg shadow-chef-500/30">Publier la recette</button>
                 </div>
             </form>
