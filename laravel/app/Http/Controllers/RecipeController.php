@@ -136,11 +136,18 @@ class RecipeController extends Controller
 
     public function search (Request $request)
     {
-        $recipes = Recipe::where('recipeTitle', 'LIKE', '%' . $request->titleToSearch . '%')->get();
+        $recipes = Recipe::where('recipeTitle', 'LIKE', '%' . $request->titleToSearch . '%')->withCount('comments')->get();
 
         $categories = Category::all();
         $ingredients = Ingredient::all();
 
         return view('recipes', compact('recipes', 'categories', 'ingredients'));
+    }
+
+    public function showRecipe ($id)
+    {
+        $recipe = Recipe::findOrFail($id)->with(['category', 'user'])->get();
+
+        return $recipe;
     }
 }
