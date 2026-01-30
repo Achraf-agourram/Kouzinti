@@ -68,35 +68,12 @@
         <div class="flex flex-wrap gap-3 mb-10 justify-center">
             <button class="px-5 py-2 rounded-full bg-gray-900 text-white font-medium shadow-md">Tout voir</button>
             @foreach ($categories as $category)
-                <button class="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-chef-500 hover:text-chef-500 transition">{{ $category->categoryImage }} {{ $category->categoryTitle }}</button>
+                <a href="/category/{{ $category->categoryTitle }}" class="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-chef-500 hover:text-chef-500 transition">{{ $category->categoryImage }} {{ $category->categoryTitle }}</a>
             @endforeach
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($recipes as $recipe)
-                <!--article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="{{ $recipe->image }}" alt="{{ $recipe->recipeTitle }}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">{{ $recipe->category->categoryTitle }}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $recipe->recipeTitle }}</h3>
-                        <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ $recipe->recipeDescription }}</p>
-                        
-                        <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <div class="text-xs text-center pt-1 w-6 h-6 rounded-full bg-yellow-200" title="{{ $recipe->user->fullName }}">{{ strtoupper(substr($recipe->user->fullName, 0, 2)) }}</div>
-                                <span class="text-xs font-medium text-gray-600">{{ $recipe->user->fullName }}</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-gray-400 text-sm">
-                                <span class="flex items-center gap-1 hover:text-chef-500 cursor-pointer"><i class="ph ph-chat-circle"></i>{{ $recipe->comments_count }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </article-->
-
                 <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 overflow-hidden border border-gray-100 flex flex-col h-full relative group">
     
                     <div class="relative h-48 overflow-hidden">
