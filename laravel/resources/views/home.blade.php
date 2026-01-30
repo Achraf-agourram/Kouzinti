@@ -77,7 +77,7 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="recettes">
         
         <div class="flex flex-wrap gap-3 mb-10 justify-center">
-            <button class="px-5 py-2 rounded-full bg-gray-900 text-white font-medium shadow-md">Tout voir</button>
+            <a href="/recipes" class="px-5 py-2 rounded-full bg-gray-900 text-white font-medium shadow-md">Tout voir</a>
             @foreach ($categories as $category)
                 <a href="/category/{{ $category->categoryTitle }}" class="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-chef-500 hover:text-chef-500 transition">{{ $category->categoryImage }} {{ $category->categoryTitle }}</a>
             @endforeach

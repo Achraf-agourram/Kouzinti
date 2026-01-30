@@ -17,3 +17,5 @@ Route::post('/addRecipe', [RecipeController::class, 'addRecipe'])->middleware('a
 Route::get('/editRecipe/{id}', [RecipeController::class, 'editRecipeForm'])->middleware('auth');
 Route::post('/editRecipe', [RecipeController::class, 'editRecipe'])->middleware('auth');
 Route::post('/deleteRecipe', [RecipeController::class, 'deleteRecipe'])->middleware('auth');
+
+Route::get('/category/{category}', [RecipeController::class, 'recipesByCategory'])->middleware('auth');
