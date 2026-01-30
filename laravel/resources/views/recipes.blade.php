@@ -37,7 +37,6 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="/home" class="text-gray-500 hover:text-chef-600 transition">Accueil</a>
                     <a href="/recipes" class="font-medium text-chef-500 transition">Explorer</a>
-                    <a href="/myrecipes" class="text-gray-500 hover:text-chef-500 transition">Mes Recettes</a>
                 </div>
 
                 <div class="flex items-center gap-4">

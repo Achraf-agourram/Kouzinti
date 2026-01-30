@@ -37,7 +37,6 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="home" class="text-chef-600 font-medium">Accueil</a>
                     <a href="recipes" class="text-gray-500 hover:text-chef-500 transition">Explorer</a>
-                    <a href="myrecipes" class="text-gray-500 hover:text-chef-500 transition">Mes Recettes</a>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -82,6 +81,8 @@
                 <a href="/category/{{ $category->categoryTitle }}" class="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-chef-500 hover:text-chef-500 transition">{{ $category->categoryImage }} {{ $category->categoryTitle }}</a>
             @endforeach
         </div>
+
+        <h2 class="flex justify-center text-lg font-bold text-gray-900 mb-8">Les Recéttes Les Plus Commentés</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($recipes as $recipe)
