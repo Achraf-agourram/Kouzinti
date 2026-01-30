@@ -148,6 +148,6 @@ class RecipeController extends Controller
     {
         $recipe = Recipe::findOrFail($id)->with(['category', 'user'])->get();
 
-        return $recipe;
+        return view('recipe');
     }
 }
