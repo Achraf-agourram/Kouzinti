@@ -20,3 +20,4 @@ Route::post('/deleteRecipe', [RecipeController::class, 'deleteRecipe'])->middlew
 
 Route::get('/category/{category}', [RecipeController::class, 'recipesByCategory'])->middleware('auth');
 Route::get('/searchRecipe', [RecipeController::class, 'search'])->middleware('auth');
+Route::get('/recipe/{id}', [RecipeController::class, 'showRecipe'])->middleware('auth');

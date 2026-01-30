@@ -93,7 +93,7 @@
                         <div class="flex justify-between items-start mb-2">
                             <span class="text-xs font-semibold text-chef-500 uppercase tracking-wide">{{ $recipe->category->categoryTitle }}</span>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $recipe->recipeTitle }}</h3>
+                        <a href="/recipe/{{ $recipe->id }}" class="text-xl font-bold text-gray-900 mb-2">{{ $recipe->recipeTitle }}</a>
                         <p class="text-gray-500 text-sm mb-4 line-clamp-2">{{ $recipe->recipeDescription }}</p>
                         
                         <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between">
