@@ -95,37 +95,90 @@
                 Discussion <span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ $recipe->comments_count }}</span>
             </h3>
 
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 flex gap-4">
+            <form method="post" action="/addComment" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 flex gap-4">
+                @csrf
                 <div class="h-10 w-10 text-white text-center pt-1 rounded-full bg-blue-500 border-2 border-white shadow overflow-hidden cursor-pointer" title="{{ auth()->user()->fullName }}">
                         {{ strtoupper(substr(auth()->user()->fullName, 0, 2)) }}
                 </div>
                 <div class="flex-1">
-                    <textarea class="w-full border-gray-200 border rounded-xl p-4 focus:ring-2 focus:ring-chef-500 outline-none resize-none text-sm" rows="3" placeholder="Donnez votre avis sur cette recette..."></textarea>
+                    <textarea name="comment" class="w-full border-gray-200 border rounded-xl p-4 focus:ring-2 focus:ring-chef-500 outline-none resize-none text-sm" rows="3" placeholder="Donnez votre avis sur cette recette..."></textarea>
                     <div class="flex justify-between items-center mt-3">
                         <span class="text-xs text-gray-400">Connecté en tant que <strong>{{ auth()->user()->fullName }}</strong></span>
-                        <button class="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-chef-500 transition">Publier</button>
+                        <button name="recipeToComment" value="{{ $recipe->id }}" class="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-chef-500 transition">Publier</button>
                     </div>
                 </div>
-            </div>
+            </form>
 
             <div class="space-y-8">
+                
+                @foreach ($recipe->comments as $comment)
+                    <div class="flex gap-4" id="comment-{{ $comment->id }}">
+                        <div class="h-10 w-10 text-white text-center pt-1 rounded-full bg-blue-500 border-2 border-white shadow overflow-hidden cursor-pointer" title="{{ auth()->user()->fullName }}">
+                            {{ strtoupper(substr($comment->user->fullName, 0, 2)) }}
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-gray-50 p-4 rounded-2xl rounded-tl-none">
+                                <div class="flex justify-between items-baseline mb-1">
+                                    <h5 class="font-bold text-gray-900 text-sm">{{ $comment->user->fullName }}</h5>
+                                </div>
+                                <p class="text-gray-700 text-sm" id="comment-text-{{ $comment->id }}">{{ $comment->commentContent }}</p>
 
-                <div class="flex gap-4">
-                    <img src="https://ui-avatars.com/api/?name=Thomas+B&background=random" class="w-10 h-10 rounded-full border border-white shadow-sm">
-                    <div class="flex-1">
-                        <div class="bg-gray-50 p-4 rounded-2xl rounded-tl-none">
-                            <div class="flex justify-between items-baseline mb-1">
-                                <h5 class="font-bold text-gray-900 text-sm">Thomas B.</h5>
+                                <form action="/editComment" method="post" id="edit-form-{{ $comment->id }}" class="hidden mt-2">
+                                    @csrf
+                                    <input type="hidden" name="recipeToEdit" value="{{ $recipe->id }}">
+                                    <textarea name="editedComment" rows="2" class="w-full bg-white border border-gray-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-chef-500 outline-none">{{ $comment->content }}</textarea>
+                                    <div class="flex justify-end gap-2 mt-2">
+                                        <button type="button" onclick="toggleEdit('{{ $comment->id }}')" class="text-xs text-gray-500 hover:text-gray-700">Annuler</button>
+                                        <button type="submit" name="commentToEdit" value="{{ $comment->id }}" class="text-xs bg-chef-500 text-white px-3 py-1 rounded-md hover:bg-chef-600">Enregistrer</button>
+                                    </div>
+                                </form>
                             </div>
-                            <p class="text-gray-700 text-sm">Est-ce qu'on peut utiliser du beurre demi-sel pour la base ?</p>
+
+                            @if ($comment->user->id === Auth::id())
+                                <div class="flex justify-between items-center mt-2 ml-2">
+
+                                    <div class="flex gap-3 opacity-100 transition-opacity duration-200">
+                                        
+                                        <button type="button" onclick="toggleEdit('{{ $comment->id }}')" class="text-xs text-gray-400 hover:text-chef-500 flex items-center gap-1" title="Modifier">
+                                            <i class="ph-bold ph-pencil-simple"></i>
+                                        </button>
+
+                                        <form method="post" action="/deleteComment" onsubmit="return confirm('Supprimer ce commentaire ?');">
+                                            @csrf
+                                            <input type="hidden" name="recipeToDelete" value="{{ $recipe->id }}">
+                                            <button type="submit" name="commentToDelete" value="{{ $comment->id }}" class="text-xs text-gray-400 hover:text-red-600 flex items-center gap-1" title="Supprimer">
+                                                <i class="ph-bold ph-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            @endif
                         </div>
                     </div>
-                </div>
+                @endforeach
+
 
             </div>
         </section>
 
     </main>
+
+    <script>
+        function toggleEdit(commentId) {
+            const textElement = document.getElementById(`comment-text-${commentId}`);
+            const formElement = document.getElementById(`edit-form-${commentId}`);
+            
+            if (formElement.classList.contains('hidden')) {
+                textElement.classList.add('hidden');
+                formElement.classList.remove('hidden');
+                formElement.querySelector('textarea').focus();
+            } else {
+                textElement.classList.remove('hidden');
+                formElement.classList.add('hidden');
+            }
+        }
+    </script>
 
 </body>
 </html>

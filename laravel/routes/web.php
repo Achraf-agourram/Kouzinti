@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'authPage'])->middleware('guest')->name('login');
@@ -21,3 +22,7 @@ Route::post('/deleteRecipe', [RecipeController::class, 'deleteRecipe'])->middlew
 Route::get('/category/{category}', [RecipeController::class, 'recipesByCategory'])->middleware('auth');
 Route::get('/searchRecipe', [RecipeController::class, 'search'])->middleware('auth');
 Route::get('/recipe/{id}', [RecipeController::class, 'showRecipe'])->middleware('auth');
+
+Route::post('/addComment', [CommentController::class, 'addComment'])->middleware('auth');
+Route::post('/editComment', [CommentController::class, 'editComment'])->middleware('auth');
+Route::post('/deleteComment', [CommentController::class, 'deleteComment'])->middleware('auth');
