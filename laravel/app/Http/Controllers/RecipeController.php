@@ -128,6 +128,9 @@ class RecipeController extends Controller
         $category = Category::where('categoryTitle', $category)->firstOrFail();
         $recipes = Recipe::with(['category', 'user'])->withCount('comments')->where('category_id', $category->id)->get();
 
-        return $recipes;
+        $categories = Category::all();
+        $ingredients = Ingredient::all();
+
+        return view('category', compact('recipes', 'categories', 'ingredients'));
     }
 }
