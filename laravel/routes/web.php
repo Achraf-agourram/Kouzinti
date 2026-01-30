@@ -19,3 +19,4 @@ Route::post('/editRecipe', [RecipeController::class, 'editRecipe'])->middleware(
 Route::post('/deleteRecipe', [RecipeController::class, 'deleteRecipe'])->middleware('auth');
 
 Route::get('/category/{category}', [RecipeController::class, 'recipesByCategory'])->middleware('auth');
+Route::get('/searchRecipe', [RecipeController::class, 'search'])->middleware('auth');

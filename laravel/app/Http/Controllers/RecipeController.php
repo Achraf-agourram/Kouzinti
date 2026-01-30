@@ -131,6 +131,16 @@ class RecipeController extends Controller
         $categories = Category::all();
         $ingredients = Ingredient::all();
 
-        return view('category', compact('recipes', 'categories', 'ingredients'));
+        return view('recipes', compact('recipes', 'categories', 'ingredients'));
+    }
+
+    public function search (Request $request)
+    {
+        $recipes = Recipe::where('recipeTitle', 'LIKE', '%' . $request->titleToSearch . '%')->get();
+
+        $categories = Category::all();
+        $ingredients = Ingredient::all();
+
+        return view('recipes', compact('recipes', 'categories', 'ingredients'));
     }
 }
