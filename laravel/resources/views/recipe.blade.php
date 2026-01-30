@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail Recette - CuiZone</title>
+    <title>Détail Recette - Kouzinti</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script>
@@ -28,53 +28,26 @@
 
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
+            <a href="/recipes" class="flex items-center gap-2">
                 <i class="ph ph-arrow-left text-xl text-gray-500 hover:text-chef-500"></i>
                 <span class="font-bold text-xl">Retour</span>
             </a>
-            <div class="font-bold text-xl">Cui<span class="text-chef-500">Zone</span></div>
+            <div class="font-bold text-xl"><span class="text-chef-500">Kouzinti</span></div>
             <div class="w-10"></div> </div>
     </nav>
 
     <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
         <div class="text-center mb-10">
-            <span class="inline-block py-1 px-3 rounded-full bg-chef-100 text-chef-600 text-xs font-bold uppercase tracking-wide mb-3">
-                🍰 Dessert
-            </span>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Cheesecake aux Fraises</h1>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">{{ $recipe->recipeTitle }}</h1>
             <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-6">
-                Le classique new-yorkais revisité avec un coulis de fraises fraîches du jardin et une base biscuitée croquante.
+                {{ $recipe->recipeDescription }}
             </p>
-
-            <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-500">
-                <div class="flex items-center gap-2">
-                    <img src="https://ui-avatars.com/api/?name=Marc+D&background=random" class="w-8 h-8 rounded-full border border-gray-200">
-                    <span class="font-medium text-gray-900">Par Marc D.</span>
-                </div>
-                <span class="hidden md:inline text-gray-300">|</span>
-                <div class="flex items-center gap-1">
-                    <i class="ph-fill ph-clock text-chef-500 text-lg"></i>
-                    <span>45 min</span>
-                </div>
-                <div class="flex items-center gap-1">
-                    <i class="ph-fill ph-users text-chef-500 text-lg"></i>
-                    <span>4 Personnes</span>
-                </div>
-                <div class="flex items-center gap-1">
-                    <i class="ph-fill ph-fire text-chef-500 text-lg"></i>
-                    <span>Facile</span>
-                </div>
-            </div>
         </div>
 
         <div class="relative w-full h-64 md:h-96 rounded-3xl overflow-hidden shadow-xl mb-12 group">
-            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80" 
+            <img src="{{ $recipe->image }}" 
                  class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="Cheesecake">
-            
-            <button class="absolute top-4 right-4 bg-white p-3 rounded-full shadow-lg text-gray-400 hover:text-red-500 transition hover:scale-110">
-                <i class="ph-fill ph-heart text-2xl"></i>
-            </button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
@@ -85,30 +58,12 @@
                         <i class="ph ph-basket text-chef-500"></i> Ingrédients
                     </h3>
                     <ul class="space-y-4">
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">200g de biscuits sablés</span>
-                        </li>
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">100g de beurre fondu</span>
-                        </li>
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">600g de fromage frais</span>
-                        </li>
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">150g de sucre en poudre</span>
-                        </li>
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">3 oeufs</span>
-                        </li>
-                        <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
-                            <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
-                            <span class="text-gray-700">250g de fraises</span>
-                        </li>
+                        @foreach ($recipe->ingredients as $ing)
+                            <li class="flex items-start gap-3 pb-3 border-b border-gray-50 last:border-0">
+                                <i class="ph-fill ph-check-circle text-chef-500 mt-1"></i>
+                                <span class="text-gray-700">{{ $ing->ingredientTitle }}</span>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -119,42 +74,23 @@
                 </h3>
                 
                 <div class="space-y-8">
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-chef-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-chef-500/20">1</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Préparer la base</h4>
-                            <p class="text-gray-600 leading-relaxed">
-                                Émiettez les biscuits sablés dans un bol. Ajoutez le beurre fondu et mélangez jusqu'à obtenir une texture sableuse humide. Tassez ce mélange au fond d'un moule à charnière.
-                            </p>
+                    @foreach ($recipe->steps as $step)
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-chef-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-chef-500/20">{{ $step->stepOrder }} </div>
+                            <div>
+                                <p class="text-gray-600 leading-relaxed">
+                                    {{ $step->stepDescription }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-chef-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-chef-500/20">2</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">La crème</h4>
-                            <p class="text-gray-600 leading-relaxed">
-                                Dans un grand saladier, battez le fromage frais avec le sucre jusqu'à ce que le mélange soit lisse. Ajoutez les œufs un par un en mélangeant bien entre chaque ajout.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-chef-500 text-white flex items-center justify-center font-bold text-lg shadow-md shadow-chef-500/20">3</div>
-                        <div>
-                            <h4 class="text-lg font-bold text-gray-900 mb-2">Cuisson</h4>
-                            <p class="text-gray-600 leading-relaxed">
-                                Versez la préparation sur la base biscuitée. Enfournez à 160°C pendant 50 minutes. Laissez refroidir complètement avant de démouler. Ajoutez les fraises sur le dessus avant de servir.
-                            </p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
 
         <hr class="border-gray-200 my-12">
 
-        <section class="max-w-3xl mx-auto" id="comments">
+        <!--section class="max-w-3xl mx-auto" id="comments">
             <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
                 Discussion <span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-full">23</span>
             </h3>
@@ -215,7 +151,7 @@
             <div class="text-center mt-8">
                 <button class="text-chef-600 text-sm font-medium hover:underline">Charger plus de commentaires</button>
             </div>
-        </section>
+        </section-->
 
     </main>
 
