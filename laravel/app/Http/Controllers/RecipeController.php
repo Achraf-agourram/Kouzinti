@@ -146,7 +146,7 @@ class RecipeController extends Controller
 
     public function showRecipe ($id)
     {
-        $recipe = Recipe::with(['comments'])->findOrFail($id);
+        $recipe = Recipe::with(['comments'])->withCount('comments')->findOrFail($id);
 
         return view('recipe', compact('recipe'));
     }

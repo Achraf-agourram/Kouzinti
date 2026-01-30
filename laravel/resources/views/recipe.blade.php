@@ -90,68 +90,40 @@
 
         <hr class="border-gray-200 my-12">
 
-        <!--section class="max-w-3xl mx-auto" id="comments">
+        <section class="max-w-3xl mx-auto" id="comments">
             <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
-                Discussion <span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-full">23</span>
+                Discussion <span class="text-sm font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{{ $recipe->comments_count }}</span>
             </h3>
 
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 flex gap-4">
-                <img src="https://ui-avatars.com/api/?name=User&background=random" class="w-10 h-10 rounded-full hidden sm:block">
+                <div class="h-10 w-10 text-white text-center pt-1 rounded-full bg-blue-500 border-2 border-white shadow overflow-hidden cursor-pointer" title="{{ auth()->user()->fullName }}">
+                        {{ strtoupper(substr(auth()->user()->fullName, 0, 2)) }}
+                </div>
                 <div class="flex-1">
                     <textarea class="w-full border-gray-200 border rounded-xl p-4 focus:ring-2 focus:ring-chef-500 outline-none resize-none text-sm" rows="3" placeholder="Donnez votre avis sur cette recette..."></textarea>
                     <div class="flex justify-between items-center mt-3">
-                        <span class="text-xs text-gray-400">Connecté en tant que <strong>Chef User</strong></span>
+                        <span class="text-xs text-gray-400">Connecté en tant que <strong>{{ auth()->user()->fullName }}</strong></span>
                         <button class="bg-gray-900 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-chef-500 transition">Publier</button>
                     </div>
                 </div>
             </div>
 
             <div class="space-y-8">
-                
-                <article class="flex gap-4">
-                    <img src="https://ui-avatars.com/api/?name=Sophie+L&background=random" class="w-10 h-10 rounded-full border border-white shadow-sm">
-                    <div class="flex-1">
-                        <div class="bg-gray-50 p-4 rounded-2xl rounded-tl-none">
-                            <div class="flex justify-between items-baseline mb-1">
-                                <h5 class="font-bold text-gray-900 text-sm">Sophie L.</h5>
-                                <span class="text-xs text-gray-400">Il y a 2 heures</span>
-                            </div>
-                            <p class="text-gray-700 text-sm">Un vrai délice ! J'ai remplacé les fraises par des framboises et c'était tout aussi bon. Merci pour le partage !</p>
-                        </div>
-                        <div class="flex gap-4 mt-2 ml-2">
-                            <button class="text-xs text-gray-500 hover:text-chef-500 font-medium">Répondre</button>
-                            <button class="text-xs text-gray-500 hover:text-red-500 font-medium flex items-center gap-1">
-                                <i class="ph ph-heart"></i> 5
-                            </button>
-                        </div>
-                    </div>
-                </article>
 
-                <article class="flex gap-4">
+                <div class="flex gap-4">
                     <img src="https://ui-avatars.com/api/?name=Thomas+B&background=random" class="w-10 h-10 rounded-full border border-white shadow-sm">
                     <div class="flex-1">
                         <div class="bg-gray-50 p-4 rounded-2xl rounded-tl-none">
                             <div class="flex justify-between items-baseline mb-1">
                                 <h5 class="font-bold text-gray-900 text-sm">Thomas B.</h5>
-                                <span class="text-xs text-gray-400">Hier</span>
                             </div>
                             <p class="text-gray-700 text-sm">Est-ce qu'on peut utiliser du beurre demi-sel pour la base ?</p>
                         </div>
-                         <div class="flex gap-4 mt-2 ml-2">
-                            <button class="text-xs text-gray-500 hover:text-chef-500 font-medium">Répondre</button>
-                            <button class="text-xs text-gray-500 hover:text-red-500 font-medium flex items-center gap-1">
-                                <i class="ph ph-heart"></i> 1
-                            </button>
-                        </div>
                     </div>
-                </article>
+                </div>
 
             </div>
-            
-            <div class="text-center mt-8">
-                <button class="text-chef-600 text-sm font-medium hover:underline">Charger plus de commentaires</button>
-            </div>
-        </section-->
+        </section>
 
     </main>
 
