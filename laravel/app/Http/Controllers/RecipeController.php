@@ -122,4 +122,12 @@ class RecipeController extends Controller
         $recipe->delete();
         return redirect('/recipes');
     }
+
+    public function recipesByCategory ($category)
+    {
+        $category = Category::where('categoryTitle', $category)->firstOrFail();
+        $recipes = Recipe::with(['category', 'user'])->withCount('comments')->where('category_id', $category->id)->get();
+
+        return $recipes;
+    }
 }
